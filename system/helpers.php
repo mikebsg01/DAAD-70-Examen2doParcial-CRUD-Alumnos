@@ -56,5 +56,16 @@ if (! function_exists('dbConnection')) {
     if (mysqli_connect_errno()) {
       throw new Exception("Function \"dbConnection\": ".mysqli_connect_error());
     }
+    return $conn;
+  }
+}
+
+if (! function_exists('dbQuery')) {
+  function dbQuery(string $query) {
+    $conn   = dbConnection();
+    $result = $conn->query($query . ';');
+    $conn->close();
+
+    return $result;
   }
 }

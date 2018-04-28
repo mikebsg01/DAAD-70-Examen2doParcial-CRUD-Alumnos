@@ -31,8 +31,10 @@ if (! empty($_POST['student'])) {
   if ($validation->fails()) {
     $errors = $validation->errors();
   } else {
-    App::print("Jalo chido");
-    dbConnection();
+    $result = dbQuery("INSERT INTO students (file_number, first_name, last_name, career) ".
+                      "VALUES ({$studentRequest['file_number']}, \"{$studentRequest['first_name']}\",".
+                      "\"{$studentRequest['last_name']}\", \"{$studentRequest['career']}\")");
+    App::print($result);
   }
 }
 ?>

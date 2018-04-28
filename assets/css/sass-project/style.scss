@@ -1,0 +1,43 @@
+/* Variables */
+$spaceFactor: 15px;
+$red: #d00343;
+
+/* General Styles */
+h1 {
+  font-size: 48px;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  margin: 10px 0 15px 0;
+}
+
+.card-form {
+  margin-top: 2 * $spaceFactor;
+}
+
+.btn-primary {
+  background-color: #fb0250;
+
+  &:hover,
+  &:active,
+  &:focus {
+    background-color: #d00343;
+  }
+}
+ 
+.dropdown-content {
+  & li > a,
+  & li > span {
+    color: $red;
+  }
+}
+
+input:not([type]):focus:not([readonly]), input[type=text]:not(.browser-default):focus:not([readonly]), input[type=password]:not(.browser-default):focus:not([readonly]), input[type=email]:not(.browser-default):focus:not([readonly]), input[type=url]:not(.browser-default):focus:not([readonly]), input[type=time]:not(.browser-default):focus:not([readonly]), input[type=date]:not(.browser-default):focus:not([readonly]), input[type=datetime]:not(.browser-default):focus:not([readonly]), input[type=datetime-local]:not(.browser-default):focus:not([readonly]), input[type=tel]:not(.browser-default):focus:not([readonly]), input[type=number]:not(.browser-default):focus:not([readonly]), input[type=search]:not(.browser-default):focus:not([readonly]), textarea.materialize-textarea:focus:not([readonly]) {  
+  border-bottom: 1px solid lighten($red, 30%);
+  -webkit-box-shadow: 0 1px 0 0 lighten($red, 30%);
+  box-shadow: 0 1px 0 0 lighten($red, 30%);
+}
+
+input:not([type]):focus:not([readonly])+label, input[type=text]:not(.browser-default):focus:not([readonly])+label, input[type=password]:not(.browser-default):focus:not([readonly])+label, input[type=email]:not(.browser-default):focus:not([readonly])+label, input[type=url]:not(.browser-default):focus:not([readonly])+label, input[type=time]:not(.browser-default):focus:not([readonly])+label, input[type=date]:not(.browser-default):focus:not([readonly])+label, input[type=datetime]:not(.browser-default):focus:not([readonly])+label, input[type=datetime-local]:not(.browser-default):focus:not([readonly])+label, input[type=tel]:not(.browser-default):focus:not([readonly])+label, input[type=number]:not(.browser-default):focus:not([readonly])+label, input[type=search]:not(.browser-default):focus:not([readonly])+label, textarea.materialize-textarea:focus:not([readonly])+label {
+  color: lighten($red, 30%);
+}

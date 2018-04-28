@@ -1,5 +1,10 @@
 /* Variables */
 $spaceFactor: 15px;
+$white: #FFFFFF;
+$whiteGrayish: #F1F1F1;
+$blackLightest: #777777;
+$blackLight: #333333;
+$black: #000000;
 $red: #d00343;
 
 /* General Styles */
@@ -9,6 +14,10 @@ h1 {
 
 h1, h2, h3, h4, h5, h6 {
   margin: 10px 0 15px 0;
+}
+
+a {
+  color: $red;
 }
 
 .card-form {
@@ -40,4 +49,15 @@ input:not([type]):focus:not([readonly]), input[type=text]:not(.browser-default):
 
 input:not([type]):focus:not([readonly])+label, input[type=text]:not(.browser-default):focus:not([readonly])+label, input[type=password]:not(.browser-default):focus:not([readonly])+label, input[type=email]:not(.browser-default):focus:not([readonly])+label, input[type=url]:not(.browser-default):focus:not([readonly])+label, input[type=time]:not(.browser-default):focus:not([readonly])+label, input[type=date]:not(.browser-default):focus:not([readonly])+label, input[type=datetime]:not(.browser-default):focus:not([readonly])+label, input[type=datetime-local]:not(.browser-default):focus:not([readonly])+label, input[type=tel]:not(.browser-default):focus:not([readonly])+label, input[type=number]:not(.browser-default):focus:not([readonly])+label, input[type=search]:not(.browser-default):focus:not([readonly])+label, textarea.materialize-textarea:focus:not([readonly])+label {
   color: lighten($red, 30%);
+}
+
+.app-print {
+  padding: 8px 12px;
+  background-color: $blackLightest;
+  border: 1px solid darken($blackLightest, 10%);
+  border-radius: 3px;
+  color: $whiteGrayish;
+  font-family: "Roboto", arial, sans-serif;
+  font-size: 16px;
+  letter-spacing: 0.9px;
 }

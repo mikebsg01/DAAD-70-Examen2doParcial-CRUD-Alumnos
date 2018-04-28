@@ -1,13 +1,39 @@
+<?php if (!file_exists('system/core.php')) exit("Sorry, has been ocurred an error trying to load the system.");
+
+require_once 'system/core.php';
+
+if (! empty($_POST['student'])) {
+  $student = $_POST['student'];
+
+  $studentRequest = filterData($_POST['user'], [
+    'file_number',
+    'first_name',
+    'last_name',
+    'career'
+  ]);
+
+  $validation = Validation::make($userRequest, [
+    'file_number'           => ['required', 'email'],
+    'password'              => ['required', 'min' => 6],
+    'passwordConfirmation'  => ['required', 'equalTo' => 'password']
+  ]);
+
+  if ($validation->fails()) {
+    $errors = $validation->errors();
+    App::print($errors);
+  } else {
+    App::print("Jalo chido");
+  }
+}
+?>
 <!DOCTYPE html>
 <html lang="es">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Insertar Alumno | Panel de Alumnos</title>
-  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" type="text/css">
-  <link href="assets/css/materialize.min.css" rel="stylesheet" type="text/css" media="screen,projection">
-  <link href="assets/css/style.css?v=<?php echo time() ?>" rel="stylesheet" type="text/css">
+  <title>Ingresar Alumno | Panel de Alumnos</title>
+  <?php include 'templates/header.php'; ?>
 </head>
 <body>
 <div class="row">
@@ -20,7 +46,7 @@
               <div class="col s12">
                 <h1 class="card-title">Ingresar alumno</h1>
               </div>
-              <form action="store.php" method="POST">
+              <form action="create.php" method="POST">
                 <div class="input-field col s12">
                   <input type="text" name="student[file_number]" id="file_number" class="validate" required="required">
                   <label for="file_number">Expediente</label>
@@ -35,6 +61,7 @@
                 </div>
                 <div class="input-field col s12">
                   <select name="student[career]" id="career" class="validate" required="required">
+                  <option selected="selected" disabled="disabled" hidden="hidden" value="">Elige una opción...</option>
                     <option value="software">Software</option>
                     <option value="telecommunications-and-networks">Telecomunicaciones y Redes</option>
                     <option value="computing">Computación</option>
@@ -51,11 +78,10 @@
           </div>
         </div>
       </div>
+      <?php include 'templates/footer.php'; ?>
     </div>
   </div>
 </div>
-<script type="text/javascript" src="assets/js/jquery-3.2.1.min.js"></script>
-<script type="text/javascript" src="assets/js/materialize.min.js"></script>
-<script type="text/javascript" src="assets/js/app.js?v=<?php echo time() ?>"></script>
+<?php include 'templates/scripts.php'; ?>
 </body>
 </html>

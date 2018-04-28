@@ -54,16 +54,16 @@ class Validation {
   protected function run() {
     foreach ($this->fieldRules as $field => $rules) {
       foreach ($rules as $rule => $options) {
-        if (is_string($rule) and $this->ruleExists($rule)) {
+        if (is_string($rule)) {
           $this->validate($field, $rule, $options);
         }
       }
     }
   }
 
-  protected function errorFound($field, $rule) {
+  protected function errorFound($field, $rule, $options = true) {
     $oldValue = $this->errorCollection->get($field) ?: collect();
-    $message = trans("validation.$rule", ['field' => $field], $this->lang);
+    $message = trans("validation.$rule", ['field' => $field] + ($options !== true ? [$rule => $options] : []), $this->lang);
 
     if (is_array($message)) {
       $message = current($message);
@@ -134,6 +134,26 @@ class Validation {
     return filter_var($fieldValue, FILTER_VALIDATE_EMAIL);
   }
 
+  public function validateNumeric($field) {
+    $fieldValue = $this->getFieldValue($field);
+    return is_numeric($fieldValue);
+  }
+
+  public function validateSize($field, $size) {
+    $fieldValue = $this->getFieldValue($field);
+    return strlen($fieldValue) === $size;
+  }
+
+  public function validateMax($field, $max) {
+    $fieldValue = $this->getFieldValue($field);
+    return strlen($fieldValue) <= $max;
+  }
+
+  public function validateIn($field, $in) {
+    $fieldValue = $this->getFieldValue($field);
+    return in_array($fieldValue, $in);
+  }
+
   public function validate($field, $rule, $options = true) {
     $callMethod = "validate$rule";
 
@@ -143,7 +163,7 @@ class Validation {
                 $this->{$callMethod}($field, $options);
 
       if (!$result) {
-        $this->errorFound($field, $rule);
+        $this->errorFound($field, $rule, $options);
       }
     } else {
       throw new BadMethodCallException("BadMethodCallException with message 'Method [$callMethod] does not exist.'");

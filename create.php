@@ -1,21 +1,31 @@
 <?php if (!file_exists('system/core.php')) exit("Sorry, has been ocurred an error trying to load the system.");
 
 require_once 'system/core.php';
+require_once 'libraries/Validation/Validation.php';
+
+$careers = [
+  'software'                        => 'Software',
+  'telecommunications-and-networks' => 'Telecomunicaciones y Redes',
+  'computing'                       => 'Computación',
+  'informatics'                     => 'Informática',
+  'admin-in-information-technology' => 'Administración en Tecnologías de Información'
+];
 
 if (! empty($_POST['student'])) {
   $student = $_POST['student'];
 
-  $studentRequest = filterData($_POST['user'], [
+  $studentRequest = filterData($_POST['student'], [
     'file_number',
     'first_name',
     'last_name',
     'career'
   ]);
 
-  $validation = Validation::make($userRequest, [
-    'file_number'           => ['required', 'email'],
-    'password'              => ['required', 'min' => 6],
-    'passwordConfirmation'  => ['required', 'equalTo' => 'password']
+  $validation = Validation::make($studentRequest, [
+    'file_number' => ['required', 'numeric', 'size' => 6],
+    'first_name'  => ['required', 'max' => 25],
+    'last_name'   => ['required', 'max' => 25],
+    'career'      => ['required', 'in' => array_keys($careers)]
   ]);
 
   if ($validation->fails()) {
@@ -62,11 +72,10 @@ if (! empty($_POST['student'])) {
                 <div class="input-field col s12">
                   <select name="student[career]" id="career" class="validate" required="required">
                   <option selected="selected" disabled="disabled" hidden="hidden" value="">Elige una opción...</option>
-                    <option value="software">Software</option>
-                    <option value="telecommunications-and-networks">Telecomunicaciones y Redes</option>
-                    <option value="computing">Computación</option>
-                    <option value="informatics">Informática</option>
-                    <option value="admin-in-information-technology">Administración en Tecnologías de Información</option>
+                    <?php foreach ($careers as $career_slug => $career_name): ?>
+                      <option value="<?php echo $career_slug; ?>"><?php echo $career_name; ?></option>
+                    <?php endforeach; ?>
+                    <option value="foo">bar</option>
                   </select>
                   <label for="career">Carrera</label>
                 </div>

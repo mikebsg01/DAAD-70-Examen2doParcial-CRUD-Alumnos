@@ -1,39 +1,22 @@
 <?php
+
 /**
- * Global Functions
- *
+ * Global Settings
  */
+$env = json_decode(file_get_contents(__DIR__.'/../env.json'));
 
-function cstrtolower($str) {
-  return mb_strtolower($str, 'UTF-8');
-}
+# Helpers
+require_once 'helpers.php';
 
-function cstrtoupper($str) {
-  return mb_strtoupper($str, 'UTF-8');
-}
-
-function cucfirst($str) {
-  $initial  = cstrtoupper(mb_substr($str, 0, 1));
-  $ucfirst  = $initial . mb_substr($str, 1);
-  return $ucfirst;
-}
-
-function capitalize($str) {
-  return cucfirst(cstrtolower($str));
-}
-
-function filterData(array $data, $filter) {
-  if (is_array($filter)) {
-    $filterData = array_intersect_key($data, array_flip($filter));
-    return $filterData;
-  }
-  return null;
+if (env('APP_ENV', 'development') === 'development' or
+    env('APP_ENV') == 'local') {
+  error_reporting(E_ALL ^ E_NOTICE | E_STRICT);
+  ini_set('display_errors', 1);
 }
 
 /**
  * Global Libraries
  */
-
 require_once __DIR__.'/../libraries/Collection/Collection.php';
 require_once __DIR__.'/../libraries/Lang/Lang.php';
 
@@ -62,4 +45,3 @@ class App {
     echo "</pre>\n";
   }
 }
-?>

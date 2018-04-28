@@ -1,5 +1,15 @@
 /* Variables */
 /* General Styles */
+.app-print {
+  padding: 8px 12px;
+  background-color: #777777;
+  border: 1px solid #5e5e5e;
+  border-radius: 3px;
+  color: #F1F1F1;
+  font-family: "Roboto", arial, sans-serif;
+  font-size: 16px;
+  letter-spacing: 0.9px; }
+
 h1 {
   font-size: 48px; }
 
@@ -28,14 +38,12 @@ input:not([type]):focus:not([readonly]), input[type=text]:not(.browser-default):
 input:not([type]):focus:not([readonly]) + label, input[type=text]:not(.browser-default):focus:not([readonly]) + label, input[type=password]:not(.browser-default):focus:not([readonly]) + label, input[type=email]:not(.browser-default):focus:not([readonly]) + label, input[type=url]:not(.browser-default):focus:not([readonly]) + label, input[type=time]:not(.browser-default):focus:not([readonly]) + label, input[type=date]:not(.browser-default):focus:not([readonly]) + label, input[type=datetime]:not(.browser-default):focus:not([readonly]) + label, input[type=datetime-local]:not(.browser-default):focus:not([readonly]) + label, input[type=tel]:not(.browser-default):focus:not([readonly]) + label, input[type=number]:not(.browser-default):focus:not([readonly]) + label, input[type=search]:not(.browser-default):focus:not([readonly]) + label, textarea.materialize-textarea:focus:not([readonly]) + label {
   color: #fd6f9b; }
 
-.app-print {
-  padding: 8px 12px;
-  background-color: #777777;
-  border: 1px solid #5e5e5e;
-  border-radius: 3px;
-  color: #F1F1F1;
-  font-family: "Roboto", arial, sans-serif;
-  font-size: 16px;
-  letter-spacing: 0.9px; }
+.lbl-error {
+  color: red; }
+
+.input-error input, .input-error textarea {
+  border-bottom: 1px solid #fd6f9b;
+  -webkit-box-shadow: 0 1px 0 0 #fd6f9b;
+  box-shadow: 0 1px 0 0 #fd6f9b; }
 
 /*# sourceMappingURL=style.css.map */

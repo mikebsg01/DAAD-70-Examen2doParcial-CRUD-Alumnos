@@ -8,6 +8,17 @@ $black: #000000;
 $red: #d00343;
 
 /* General Styles */
+.app-print {
+  padding: 8px 12px;
+  background-color: $blackLightest;
+  border: 1px solid darken($blackLightest, 10%);
+  border-radius: 3px;
+  color: $whiteGrayish;
+  font-family: "Roboto", arial, sans-serif;
+  font-size: 16px;
+  letter-spacing: 0.9px;
+}
+
 h1 {
   font-size: 48px;
 }
@@ -51,13 +62,14 @@ input:not([type]):focus:not([readonly])+label, input[type=text]:not(.browser-def
   color: lighten($red, 30%);
 }
 
-.app-print {
-  padding: 8px 12px;
-  background-color: $blackLightest;
-  border: 1px solid darken($blackLightest, 10%);
-  border-radius: 3px;
-  color: $whiteGrayish;
-  font-family: "Roboto", arial, sans-serif;
-  font-size: 16px;
-  letter-spacing: 0.9px;
+.lbl-error {
+  color: red;
+}
+
+.input-error {
+  input, textarea {  
+    border-bottom: 1px solid lighten($red, 30%);
+    -webkit-box-shadow: 0 1px 0 0 lighten($red, 30%);
+    box-shadow: 0 1px 0 0 lighten($red, 30%);
+  }
 }

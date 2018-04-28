@@ -32,6 +32,7 @@ if (! empty($_POST['student'])) {
     $errors = $validation->errors();
   } else {
     App::print("Jalo chido");
+    dbConnection();
   }
 }
 ?>
@@ -83,7 +84,6 @@ if (! empty($_POST['student'])) {
                     <?php foreach ($careers as $career_slug => $career_name): ?>
                       <option value="<?php echo $career_slug; ?>" <?php echo (($career_slug === $studentRequest['career']) ? "selected=\"selected\"" : '') ?>><?php echo $career_name; ?></option>
                     <?php endforeach; ?>
-                    <option value="foo">bar</option>
                   </select>
                   <label for="career">Carrera</label>
                   <?php if (isset($errors) and $errors->has('career')): ?>

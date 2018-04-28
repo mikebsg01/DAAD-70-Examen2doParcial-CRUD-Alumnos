@@ -43,3 +43,18 @@ if (! function_exists('filterData')) {
     return null;
   }
 }
+
+if (! function_exists('dbConnection')) {
+  function dbConnection() {
+    $conn = new mysqli(
+      env('DB_HOST'), 
+      env('DB_USER'),
+      env('DB_PASSWORD'),
+      env('DB_DATABASE')
+    );
+
+    if (mysqli_connect_errno()) {
+      throw new Exception("Function \"dbConnection\": ".mysqli_connect_error());
+    }
+  }
+}

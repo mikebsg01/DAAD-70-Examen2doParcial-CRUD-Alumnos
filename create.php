@@ -26,8 +26,11 @@ if (! empty($_POST['student'])) {
     $errors = $validation->errors();
   } else {
     $result = dbQuery("INSERT INTO students (file_number, first_name, last_name, career) ".
-                      "VALUES ({$studentRequest['file_number']}, \"{$studentRequest['first_name']}\",".
-                      "\"{$studentRequest['last_name']}\", \"{$studentRequest['career']}\")");
+                      "VALUES ({$studentRequest['file_number']}, ".
+                      "\"{$studentRequest['first_name']}\", ".
+                      "\"{$studentRequest['last_name']}\", ".
+                      "\"{$studentRequest['career']}\")");
+
     return header('Location: index.php');
   }
 }
@@ -42,6 +45,7 @@ if (! empty($_POST['student'])) {
   <?php include 'templates/header.php'; ?>
 </head>
 <body>
+<?php include 'templates/navbar.php'; ?>
 <div class="row">
   <div class="container">
     <div class="row">

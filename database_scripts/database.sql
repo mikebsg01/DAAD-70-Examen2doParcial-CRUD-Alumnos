@@ -8,5 +8,7 @@ CREATE TABLE IF NOT EXISTS school.students (
 	first_name VARCHAR(25) NOT NULL,
     last_name VARCHAR(25) NOT NULL,
     career VARCHAR(45) NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP, 
+	updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     PRIMARY KEY(id)
 );

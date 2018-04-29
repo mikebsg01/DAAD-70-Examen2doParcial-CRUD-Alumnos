@@ -2,7 +2,17 @@
 
 require_once 'system/core.php';
 
-$result = dbQuery("SELECT * FROM `school`.`students` WHERE 1");
+if (! empty($_GET['search'])) {
+  $search = $_GET['search'];
+
+  $result = dbQuery("SELECT * FROM `school`.`students` WHERE".
+                    "(`students`.`file_number` LIKE \"%{$search}%\" OR ".
+                    "`students`.`first_name` LIKE \"%{$search}%\" OR ". 
+                    "`students`.`last_name`  LIKE \"%{$search}%\") ".
+                    "ORDER BY `students`.`file_number` ASC");
+} else {
+  $result = dbQuery("SELECT * FROM `school`.`students` WHERE 1 ORDER BY `students`.`file_number` ASC");
+}
 
 if ($result->num_rows > 0) {
   $students = [];
@@ -23,34 +33,7 @@ if ($result->num_rows > 0) {
   <?php include 'templates/header.php'; ?>
 </head>
 <body>
-<div class="navbar-fixed">
-  <nav class="app-navbar">
-    <div class="nav-wrapper">
-      <div class="container">
-        <div class="row">
-          <div class="col s3">
-            <a href="#" class="brand-logo">Panel de Alumnos</a>
-          </div>
-          <div class="col s6">
-            <div class="row">
-              <form>
-                <div class="input-field">
-                  <input id="search" type="search" placeholder="Buscar Alumno" />
-                  <label for="search"><i class="material-icons">search</i></label>
-                </div>
-              </form>
-            </div>
-          </div>
-          <div class="col s3">
-            <ul id="nav-mobile" class="right hide-on-med-and-down">
-              <li><a href="index.php"><i class="material-icons left">home</i>Inicio</a></li>
-            </ul>
-          </div>
-        </div>
-      </div>
-    </div>
-  </nav> 
-</div> 
+<?php include 'templates/navbar.php'; ?>
 <div class="index-page row">
   <div class="container">
     <div class="row">
@@ -116,6 +99,3 @@ if ($result->num_rows > 0) {
 <?php include 'templates/scripts.php'; ?>
 </body>
 </html>
-<?php
-  $result->close();
-?>

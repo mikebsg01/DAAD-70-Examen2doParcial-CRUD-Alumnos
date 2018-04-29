@@ -4,13 +4,13 @@
       <div class="container">
         <div class="row">
           <div class="col s3">
-            <a href="#" class="brand-logo">Panel de Alumnos</a>
+            <a href="index.php" class="brand-logo">Panel de Alumnos</a>
           </div>
           <div class="col s6">
             <div class="row">
               <form action="index.php" method="GET">
                 <div class="input-field">
-                  <input type="search" name="search" id="search" placeholder="Buscar Alumno" />
+                  <input type="search" name="search" id="search" placeholder="Buscar Alumno" <?php echo ((!empty($search)) ? "value=\"{$search}\"" : ""); ?>>
                   <label for="search"><i class="material-icons">search</i></label>
                 </div>
               </form>

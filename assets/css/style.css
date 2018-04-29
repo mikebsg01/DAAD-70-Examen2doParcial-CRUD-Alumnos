@@ -46,6 +46,9 @@ input:not([type]):focus:not([readonly]) + label, input[type=text]:not(.browser-d
   -webkit-box-shadow: 0 1px 0 0 #fd6f9b;
   box-shadow: 0 1px 0 0 #fd6f9b; }
 
+.inline-block {
+  display: inline-block !important; }
+
 /* Custom Placeholder Styles */
 ::placeholder {
   color: #858585;

@@ -76,6 +76,10 @@ input:not([type]):focus:not([readonly])+label, input[type=text]:not(.browser-def
   }
 }
 
+.inline-block {
+  display: inline-block !important;
+}
+
 /* Custom Placeholder Styles */
 ::placeholder {
   color: lighten($blackLight, 32%);

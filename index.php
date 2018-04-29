@@ -72,7 +72,11 @@ if ($result->num_rows > 0) {
                           <td class="center-align"><?php echo $careers[$student['career']]; ?></td>
                           <td class="center-align">
                             <button class="waves-effect waves-light btn btn-primary white grey-text text-darken-4"><i class="material-icons">edit</i></button>
-                            <button class="waves-effect waves-light btn btn-primary"><i class="material-icons">delete</i></button>
+                            <form action="delete.php" method="POST" class="inline-block">
+                              <input type="hidden" name="_method" value="DELETE">
+                              <input type="hidden" name="file_number" value="<?php echo $student['file_number']; ?>">
+                              <button type="submit" class="waves-effect waves-light btn btn-primary"><i class="material-icons">delete</i></button>
+                            </form>
                           </td>
                         </tr>
                       <?php endforeach; ?>

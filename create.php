@@ -3,13 +3,7 @@
 require_once 'system/core.php';
 require_once 'libraries/Validation/Validation.php';
 
-$careers = [
-  'software'                        => 'Software',
-  'telecommunications-and-networks' => 'Telecomunicaciones y Redes',
-  'computing'                       => 'Computación',
-  'informatics'                     => 'Informática',
-  'admin-in-information-technology' => 'Administración en Tecnologías de Información'
-];
+$careers = getGlobalVar('careers');
 
 if (! empty($_POST['student'])) {
   $student = $_POST['student'];
@@ -34,7 +28,7 @@ if (! empty($_POST['student'])) {
     $result = dbQuery("INSERT INTO students (file_number, first_name, last_name, career) ".
                       "VALUES ({$studentRequest['file_number']}, \"{$studentRequest['first_name']}\",".
                       "\"{$studentRequest['last_name']}\", \"{$studentRequest['career']}\")");
-    App::print($result);
+    return header('Location: index.php');
   }
 }
 ?>

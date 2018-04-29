@@ -8,6 +8,14 @@ if (! function_exists('env')) {
   }
 }
 
+if (! function_exists('getGlobalVar')) {
+  function getGlobalVar(string $var) {
+    $variables = include 'global.variables.php';
+
+    return (! empty($variables[$var]) ? $variables[$var] : null);
+  }
+}
+
 if (! function_exists('cstrtolower')) {
   function cstrtolower($str) {
     return mb_strtolower($str, 'UTF-8');

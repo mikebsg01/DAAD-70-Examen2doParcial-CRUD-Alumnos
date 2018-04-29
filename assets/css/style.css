@@ -46,6 +46,44 @@ input:not([type]):focus:not([readonly]) + label, input[type=text]:not(.browser-d
   -webkit-box-shadow: 0 1px 0 0 #fd6f9b;
   box-shadow: 0 1px 0 0 #fd6f9b; }
 
+/* Custom Placeholder Styles */
+::placeholder {
+  color: #858585;
+  opacity: 1; }
+
+:-ms-input-placeholder {
+  color: #858585; }
+
+::-ms-input-placeholder {
+  color: #858585; }
+
+/* Custom Navbar Styles */
+.app-navbar {
+  background-color: #FFFFFF;
+  color: #525252;
+  border-bottom: 4px solid #f1024d; }
+  .app-navbar > .nav-wrapper > .container > .row .brand-logo {
+    font-size: 24px;
+    color: #525252; }
+  .app-navbar > .nav-wrapper > .container > .row ul li a {
+    color: #525252 !important; }
+  .app-navbar > .nav-wrapper .input-field input[type=search] {
+    margin-top: 10px;
+    height: 40px;
+    background-color: #eaeaea;
+    border-radius: 3px;
+    color: #858585; }
+    .app-navbar > .nav-wrapper .input-field input[type=search]:hover {
+      background-color: #f4f4f4; }
+    .app-navbar > .nav-wrapper .input-field input[type=search]:active, .app-navbar > .nav-wrapper .input-field input[type=search]:focus {
+      background-color: inherit;
+      border-bottom-color: #f1024d;
+      color: #525252; }
+    .app-navbar > .nav-wrapper .input-field input[type=search] + label > i {
+      margin-top: 10px;
+      margin-left: 20px;
+      color: #858585; }
+
 .index-page .add-btn-container {
   padding-top: 10px; }
 .index-page .alert-empty-data {

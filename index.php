@@ -19,10 +19,38 @@ if ($result->num_rows > 0) {
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Ingresar Alumno | Panel de Alumnos</title>
+  <title>Lista de Alumnos | Panel de Alumnos</title>
   <?php include 'templates/header.php'; ?>
 </head>
 <body>
+<div class="navbar-fixed">
+  <nav class="app-navbar">
+    <div class="nav-wrapper">
+      <div class="container">
+        <div class="row">
+          <div class="col s3">
+            <a href="#" class="brand-logo">Panel de Alumnos</a>
+          </div>
+          <div class="col s6">
+            <div class="row">
+              <form>
+                <div class="input-field">
+                  <input id="search" type="search" placeholder="Buscar Alumno" />
+                  <label for="search"><i class="material-icons">search</i></label>
+                </div>
+              </form>
+            </div>
+          </div>
+          <div class="col s3">
+            <ul id="nav-mobile" class="right hide-on-med-and-down">
+              <li><a href="index.php"><i class="material-icons left">home</i>Inicio</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </nav> 
+</div> 
 <div class="index-page row">
   <div class="container">
     <div class="row">
@@ -39,7 +67,7 @@ if ($result->num_rows > 0) {
             </div>
             <div class="row">
               <div class="col s12">
-                <table>
+                <table class="highlight">
                   <thead>
                     <tr>
                       <th>Expediente</th>

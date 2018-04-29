@@ -98,14 +98,14 @@ if (! empty($_POST['student'])) {
                   <?php endif; ?>
                 </div>
                 <div class="input-field col s12 <?php echo ((isset($errors) and $errors->has('first_name')) ? 'input-error' : '') ?>">
-                  <input type="text" name="student[first_name]" id="first_name" class="validate" required="required" <?php echo(! empty($studentRequest['file_number']) ? "value=\"{$studentRequest['first_name']}\"" : (! empty($student['first_name']) ? "value=\"{$student['first_name']}\"" : ""))?>>
+                  <input type="text" name="student[first_name]" id="first_name" class="validate" required="required" <?php echo(! empty($studentRequest['first_name']) ? "value=\"{$studentRequest['first_name']}\"" : (! empty($student['first_name']) ? "value=\"{$student['first_name']}\"" : ""))?>>
                   <label for="first_name">Nombre(s)</label>
                   <?php if (isset($errors) and $errors->has('first_name')): ?>
                     <span class="lbl-error"><?php echo $errors->first('first_name') ?></span>
                   <?php endif; ?>
                 </div>
                 <div class="input-field col s12 <?php echo ((isset($errors) and $errors->has('last_name')) ? 'input-error' : '') ?>">
-                  <input type="text" name="student[last_name]" id="last_name" class="validate" required="required" <?php echo (! empty($studentRequest['file_number']) ? "value=\"{$studentRequest['last_name']}\"" : (! empty($student['last_name']) ? "value=\"{$student['last_name']}\"" : ""))?>>
+                  <input type="text" name="student[last_name]" id="last_name" class="validate" required="required" <?php echo (! empty($studentRequest['last_name']) ? "value=\"{$studentRequest['last_name']}\"" : (! empty($student['last_name']) ? "value=\"{$student['last_name']}\"" : ""))?>>
                   <label for="last_name">Apellido(s)</label>
                   <?php if (isset($errors) and $errors->has('last_name')): ?>
                     <span class="lbl-error"><?php echo $errors->first('last_name') ?></span>

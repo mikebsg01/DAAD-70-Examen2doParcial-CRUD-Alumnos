@@ -5,6 +5,19 @@ require_once 'libraries/Validation/Validation.php';
 
 $careers = getGlobalVar('careers');
 
+if (! empty($_GET['file_number'])) {
+  $file_number = (int) $_GET['file_number'];
+
+  $result = dbQuery("SELECT * FROM `school`.`students` ".
+                    "WHERE `students`.`file_number` = '{$file_number}' LIMIT 1");
+  
+  if ($result->num_rows == 0) {
+    return header('Location: index.php');
+  }
+
+  $student = $result->fetch_assoc();
+}
+
 if (! empty($_POST['student'])) {
   $student = $_POST['student'];
 
@@ -31,15 +44,14 @@ if (! empty($_POST['student'])) {
     if (getCounter($result) > 0) {
       makeFlash('STATUS_ERROR', 'El expediente ingresado ya existe.');
     } else {
-      $result = dbQuery("INSERT INTO `school`.`students` ".
-                        "(`students`.`file_number`, `students`.`first_name`, ".
-                        "`students`.`last_name`, `students`.`career`) ".
-                        "VALUES ({$studentRequest['file_number']}, ".
-                        "\"{$studentRequest['first_name']}\", ".
-                        "\"{$studentRequest['last_name']}\", ".
-                        "\"{$studentRequest['career']}\")");
+      $result = dbQuery("UPDATE `school`.`students` SET ".
+                        "`students`.`file_number` = \"{$studentRequest['file_number']}\", ".
+                        "`students`.`first_name` = \"{$studentRequest['first_name']}\", ".
+                        "`students`.`last_name` = \"{$studentRequest['last_name']}\", ".
+                        "`students`.`career` = \"{$studentRequest['career']}\" ".
+                        "WHERE `students`.`file_number` = '{$file_number}'");
 
-      makeFlash('STATUS_SUCCESS', 'El alumno ha sido registrado exitosamente! :)');
+      makeFlash('STATUS_SUCCESS', 'El alumno ha sido actualizado exitosamente! :)');
       return header('Location: index.php');
     }
   }
@@ -73,23 +85,23 @@ if (! empty($_POST['student'])) {
               <div class="col s12">
                 <h1 class="card-title">Ingresar alumno</h1>
               </div>
-              <form action="create.php" method="POST">
+              <form action="update.php?file_number=<?php echo $file_number; ?>" method="POST">
                 <div class="input-field col s12 <?php echo ((isset($errors) and $errors->has('file_number')) ? 'input-error' : '') ?>">
-                  <input type="text" name="student[file_number]" id="file_number" class="validate" required="required" <?php echo (! empty($studentRequest['file_number']) ? "value=\"{$studentRequest['file_number']}\"" : '')?>>
+                  <input type="text" name="student[file_number]" id="file_number" class="validate" required="required" <?php echo (! empty($studentRequest['file_number']) ? "value=\"{$studentRequest['file_number']}\"" : (! empty($student['file_number']) ? "value=\"{$student['file_number']}\"" : ""))?>>
                   <label for="file_number">Expediente</label>
                   <?php if (isset($errors) and $errors->has('file_number')): ?>
                     <span class="lbl-error"><?php echo $errors->first('file_number') ?></span>
                   <?php endif; ?>
                 </div>
                 <div class="input-field col s12 <?php echo ((isset($errors) and $errors->has('first_name')) ? 'input-error' : '') ?>">
-                  <input type="text" name="student[first_name]" id="first_name" class="validate" required="required" <?php echo(! empty($studentRequest['file_number']) ? "value=\"{$studentRequest['first_name']}\"" : '')?>>
+                  <input type="text" name="student[first_name]" id="first_name" class="validate" required="required" <?php echo(! empty($studentRequest['file_number']) ? "value=\"{$studentRequest['first_name']}\"" : (! empty($student['first_name']) ? "value=\"{$student['first_name']}\"" : ""))?>>
                   <label for="first_name">Nombre(s)</label>
                   <?php if (isset($errors) and $errors->has('first_name')): ?>
                     <span class="lbl-error"><?php echo $errors->first('first_name') ?></span>
                   <?php endif; ?>
                 </div>
                 <div class="input-field col s12 <?php echo ((isset($errors) and $errors->has('last_name')) ? 'input-error' : '') ?>">
-                  <input type="text" name="student[last_name]" id="last_name" class="validate" required="required" <?php echo (! empty($studentRequest['file_number']) ? "value=\"{$studentRequest['last_name']}\"" : '')?>>
+                  <input type="text" name="student[last_name]" id="last_name" class="validate" required="required" <?php echo (! empty($studentRequest['file_number']) ? "value=\"{$studentRequest['last_name']}\"" : (! empty($student['last_name']) ? "value=\"{$student['last_name']}\"" : ""))?>>
                   <label for="last_name">Apellido(s)</label>
                   <?php if (isset($errors) and $errors->has('last_name')): ?>
                     <span class="lbl-error"><?php echo $errors->first('last_name') ?></span>
@@ -97,9 +109,9 @@ if (! empty($_POST['student'])) {
                 </div>
                 <div class="input-field col s12">
                   <select name="student[career]" id="career" class="validate" required="required">
-                  <option disabled="disabled" hidden="hidden" value="" <?php echo ((isset($errors) and $errors->has('career') and in_array($studentRequest['career'], array_keys($careers))) ? '' : "selected=\"selected\"") ?>>Elige una opción...</option>
+                  <option disabled="disabled" hidden="hidden" value="" <?php echo ((isset($errors) and $errors->has('career') and in_array($studentRequest['career'], array_keys($careers))) ? '' : ((!empty($student['career']) and in_array($student['career'], array_keys($careers))) ? '' : "selected=\"selected\"")) ?>>Elige una opción...</option>
                     <?php foreach ($careers as $career_slug => $career_name): ?>
-                      <option value="<?php echo $career_slug; ?>" <?php echo (($career_slug === $studentRequest['career']) ? "selected=\"selected\"" : '') ?>><?php echo $career_name; ?></option>
+                      <option value="<?php echo $career_slug; ?>" <?php echo ((!empty($studentRequest['career']) and ($career_slug === $studentRequest['career'])) ? "selected=\"selected\"" : ((!empty($student['career']) and ($career_slug === $student['career'])) ? "selected=\"selected\"" : '')) ?>><?php echo $career_name; ?></option>
                     <?php endforeach; ?>
                   </select>
                   <label for="career">Carrera</label>

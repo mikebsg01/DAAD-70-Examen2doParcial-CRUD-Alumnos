@@ -85,7 +85,7 @@ if ($result->num_rows > 0) {
                           <td><?php echo $student['last_name']; ?></td>
                           <td class="center-align"><?php echo $careers[$student['career']]; ?></td>
                           <td class="center-align">
-                            <button class="waves-effect waves-light btn btn-primary white grey-text text-darken-4"><i class="material-icons">edit</i></button>
+                            <a href="update.php?file_number=<?php echo $student['file_number']; ?>" class="waves-effect waves-light btn btn-primary white grey-text text-darken-4"><i class="material-icons">edit</i></a>
                             <form action="delete.php" method="POST" class="inline-block">
                               <input type="hidden" name="_method" value="DELETE">
                               <input type="hidden" name="file_number" value="<?php echo $student['file_number']; ?>">

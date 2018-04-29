@@ -1,4 +1,8 @@
 <?php
+/**
+ * Start Session
+ */
+session_start();
 
 /**
  * Global Settings

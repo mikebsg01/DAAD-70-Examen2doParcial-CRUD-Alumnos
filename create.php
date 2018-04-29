@@ -25,13 +25,23 @@ if (! empty($_POST['student'])) {
   if ($validation->fails()) {
     $errors = $validation->errors();
   } else {
-    $result = dbQuery("INSERT INTO students (file_number, first_name, last_name, career) ".
-                      "VALUES ({$studentRequest['file_number']}, ".
-                      "\"{$studentRequest['first_name']}\", ".
-                      "\"{$studentRequest['last_name']}\", ".
-                      "\"{$studentRequest['career']}\")");
+    $result = dbQuery("SELECT count(*) as `counter` FROM `school`.`students` ".
+                      "WHERE `students`.`file_number` = '{$studentRequest['file_number']}'");
 
-    return header('Location: index.php');
+    if (getCounter($result) > 0) {
+      makeFlash('STATUS_ERROR', 'El expediente ingresado ya existe.');
+    } else {
+      $result = dbQuery("INSERT INTO `school`.`students` ".
+                        "(`students`.`file_number`, `students`.`first_name`, ".
+                        "`students`.`last_name`, `students`.`career`) ".
+                        "VALUES ({$studentRequest['file_number']}, ".
+                        "\"{$studentRequest['first_name']}\", ".
+                        "\"{$studentRequest['last_name']}\", ".
+                        "\"{$studentRequest['career']}\")");
+
+      makeFlash('STATUS_SUCCESS', 'El alumno ha sido registrado exitosamente! :)');
+      return header('Location: index.php');
+    }
   }
 }
 ?>
@@ -46,9 +56,16 @@ if (! empty($_POST['student'])) {
 </head>
 <body>
 <?php include 'templates/navbar.php'; ?>
-<div class="row">
+<div class="create-page row">
   <div class="container">
     <div class="row">
+      <?php if (existsFlash('STATUS_ERROR')): ?>
+        <div class="alert-status col s6 offset-s3">
+          <div class="card-panel red darken-2 blue-grey-text text-lighten-5">
+            <span><?php echo getFlash('STATUS_ERROR'); ?></span>
+          </div>
+        </div>
+      <?php endif; ?>
       <div class="col s6 offset-s3">
         <div class="card card-form">
           <div class="card-content">

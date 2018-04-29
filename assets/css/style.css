@@ -87,6 +87,12 @@ input:not([type]):focus:not([readonly]) + label, input[type=text]:not(.browser-d
       margin-left: 20px;
       color: #858585; }
 
+.create-page .alert-status {
+  margin-top: 10px;
+  margin-bottom: -20px; }
+
+.index-page .alert-status {
+  margin-top: 10px; }
 .index-page .add-btn-container {
   padding-top: 10px; }
 .index-page .alert-empty-data {

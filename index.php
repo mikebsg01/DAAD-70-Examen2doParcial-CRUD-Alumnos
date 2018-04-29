@@ -37,6 +37,20 @@ if ($result->num_rows > 0) {
 <div class="index-page row">
   <div class="container">
     <div class="row">
+      <?php if (existsFlash('STATUS_SUCCESS')): ?>
+        <div class="alert-status col s12">
+          <div class="card-panel green darken-1 white-text">
+            <span><?php echo getFlash('STATUS_SUCCESS'); ?></span>
+          </div>
+        </div>
+      <?php endif; ?>
+      <?php if (existsFlash('STATUS_ERROR')): ?>
+        <div class="alert-status col s12">
+          <div class="card-panel red darken-2 blue-grey-text text-lighten-5">
+            <span><?php echo getFlash('STATUS_ERROR'); ?></span>
+          </div>
+        </div>
+      <?php endif; ?>
       <div class="col s12">
         <div class="card">
           <div class="card-content">

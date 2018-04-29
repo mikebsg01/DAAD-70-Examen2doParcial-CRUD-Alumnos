@@ -77,3 +77,36 @@ if (! function_exists('dbQuery')) {
     return $result;
   }
 }
+
+if (! function_exists('getCounter')) {
+  function getCounter($queryResult) {
+    if ($queryResult->num_rows > 0) {
+      $row = $queryResult->fetch_assoc();
+      $counter = (int) $row['counter'];
+
+      return $counter;
+    }
+    return null;
+  }
+}
+
+if (! function_exists('makeFlash')) {
+  function makeFlash(string $key, string $content) {
+    $_SESSION[$key] = $content;
+  }
+}
+
+if (! function_exists('existsFlash')) {
+  function existsFlash(string $key) {
+    return isset($_SESSION[$key]);
+  }
+}
+
+if (! function_exists('getFlash')) {
+  function getFlash(string $key) {
+    $content = $_SESSION[$key];
+    unset($_SESSION[$key]);
+
+    return $content;
+  }
+}

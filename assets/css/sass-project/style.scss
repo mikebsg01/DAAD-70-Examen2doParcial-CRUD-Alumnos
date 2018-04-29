@@ -147,7 +147,17 @@ input:not([type]):focus:not([readonly])+label, input[type=text]:not(.browser-def
   }
 }
 
+.create-page {
+  .alert-status {
+    margin-top: 10px;
+    margin-bottom: -20px;
+  }
+}
+
 .index-page {
+  .alert-status {
+    margin-top: 10px;
+  }
 
   .add-btn-container {
     padding-top: 10px;

@@ -16,7 +16,7 @@ if (!empty($_POST['_method']) and $_POST['_method'] == 'DELETE' and
     $erased = dbQuery("DELETE FROM `school`.`students` WHERE id = '$id'");
     
     if ($erased) {
-
+      makeFlash('STATUS_ERROR', 'El alumno ha sido eliminado exitosamente.');
     }
   }
 }

@@ -38,10 +38,14 @@ if (! empty($_POST['student'])) {
   if ($validation->fails()) {
     $errors = $validation->errors();
   } else {
-    $result = dbQuery("SELECT count(*) as `counter` FROM `school`.`students` ".
-                      "WHERE `students`.`file_number` = '{$studentRequest['file_number']}'");
+    $isDifferentFileNumber = $studentRequest['file_number'] != $file_number;
 
-    if (getCounter($result) > 0) {
+    if ($isDifferentFileNumber) {
+      $result = dbQuery("SELECT count(*) as `counter` FROM `school`.`students` ".
+                        "WHERE `students`.`file_number` = '{$studentRequest['file_number']}'");
+    }
+
+    if ($isDifferentFileNumber and getCounter($result) > 0) {
       makeFlash('STATUS_ERROR', 'El expediente ingresado ya existe.');
     } else {
       $result = dbQuery("UPDATE `school`.`students` SET ".

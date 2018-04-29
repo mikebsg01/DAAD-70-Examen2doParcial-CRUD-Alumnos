@@ -173,4 +173,11 @@ input:not([type]):focus:not([readonly])+label, input[type=text]:not(.browser-def
       font-size: 16px;
     }
   }
+
+  table {
+    .th-file-number,
+    .td-file-number {
+      padding-right: $spaceFactor;
+    }
+  }
 }

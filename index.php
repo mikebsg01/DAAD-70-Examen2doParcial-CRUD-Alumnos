@@ -67,7 +67,7 @@ if ($result->num_rows > 0) {
                 <table class="highlight">
                   <thead>
                     <tr>
-                      <th>Expediente</th>
+                      <th class="th-file-number">Expediente</th>
                       <th>Nombre(s)</th>
                       <th>Apellido(s)</th>
                       <th class="center-align">Carrera</th>
@@ -78,7 +78,7 @@ if ($result->num_rows > 0) {
                     <?php if ($result->num_rows > 0): ?>
                       <?php foreach ($students as $student): ?>
                         <tr>
-                          <td class="right-align">
+                          <td class="right-align td-file-number">
                             <b><?php echo $student['file_number']; ?></b>
                           </td>
                           <td><?php echo $student['first_name']; ?></td>

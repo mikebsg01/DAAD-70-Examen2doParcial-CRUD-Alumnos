@@ -9,7 +9,7 @@ Materia: Desarrollo de Aplicaciones con Acceso a Datos
 
 Migrar base de datos:
 
-    mysql -u root < database_scripts/database.sql
+    mysql -u root -p < database_scripts/database.sql
     
  Posteriormente deberá introducir su contraseña de MySQL.
  
